@@ -1,7 +1,8 @@
-package com.neouto.munazam
+package com.neouto.munazam.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.neouto.munazam.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
