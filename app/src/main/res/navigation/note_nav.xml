@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/notesListFragment"
-        android:name="com.neouto.munazam.notesListFragment"
+        android:name="com.neouto.munazam.ui.NotesListFragment"
         android:label="fragment_notes_list"
         tools:layout="@layout/fragment_notes_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/createNoteFragment"
-        android:name="com.neouto.munazam.CreateNoteFragment"
+        android:name="com.neouto.munazam.ui.CreateNoteFragment"
         android:label="fragment_create_note"
         tools:layout="@layout/fragment_create_note" >
         <action
