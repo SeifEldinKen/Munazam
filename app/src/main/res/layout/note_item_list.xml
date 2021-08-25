@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toStartOf="@+id/priorityIndicator"/>
 
         <TextView
-            android:id="@+id/textDescription"
+            android:id="@+id/textViewDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
