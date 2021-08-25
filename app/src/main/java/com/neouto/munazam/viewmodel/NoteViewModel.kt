@@ -30,7 +30,9 @@ class NoteViewModel(private val repository: NoteRepository): ViewModel() {
 
     // --> delete all database
     fun deleteAllNotes() {
-        repository.deleteAllNotes()
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllNotes()
+        }
     }
 
 }

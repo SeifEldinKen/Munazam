@@ -1,10 +1,13 @@
 package com.neouto.munazam.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doBeforeTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.neouto.munazam.R
 import com.neouto.munazam.data.model.Note
@@ -31,11 +34,15 @@ class CreateNoteFragment: BaseFragment() {
             saveNoteInDatabase()
         }
 
+        binding.buttonDeleteAllNotes.setOnClickListener {
+            sharedViewModel.deleteAllNotes()
+        }
+
     }
 
 
     private fun saveNoteInDatabase() {
-        if (inputCheck(getDataFromUI().title, getDataFromUI().description)) {
+        if (inputCheck()) {
             sharedViewModel.insertNote(getDataFromUI())
 
             // --> Back
@@ -43,20 +50,24 @@ class CreateNoteFragment: BaseFragment() {
         }
     }
 
-    private fun inputCheck(title: String, description: String): Boolean {
+    private fun inputCheck(): Boolean {
         return when {
-
-            title.isEmpty() -> {
-                binding.TitleInputLayout.error = "Required"
+            binding.inputTitle.text!!.isEmpty() -> {
+                binding.titleInputLayout.error = "Required"
+                binding.descriptionInputLayout.error = null
                 false
             }
 
-            description.isEmpty() -> {
+            binding.inputDescription.text!!.isEmpty() -> {
                 binding.descriptionInputLayout.error = "Required"
+                binding.titleInputLayout.error = null
                 false
             }
 
-            else -> true
+            else -> {
+                binding.descriptionInputLayout.error = null
+                true
+            }
         }
     }
 

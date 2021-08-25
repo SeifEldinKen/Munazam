@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neouto.munazam.R
 import com.neouto.munazam.data.model.Note
@@ -26,7 +27,10 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote: Note = this.oldNotesList[position]
 
-
+        holder.apply {
+            textViewTitle.text = currentNote.title
+            textDescription.text = currentNote.description
+        }
 
     }
 
@@ -35,7 +39,12 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     }
 
     fun setData(newNotesList: List<Note>) {
+        val noteDiffUtil: NoteDiffUtil = NoteDiffUtil(oldNotesList, newNotesList)
+        val diffResult = DiffUtil.calculateDiff(noteDiffUtil)
+
         this.oldNotesList = newNotesList
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }
