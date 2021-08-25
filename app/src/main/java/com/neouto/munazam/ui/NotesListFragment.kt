@@ -10,7 +10,7 @@ import com.neouto.munazam.R
 import com.neouto.munazam.databinding.FragmentNotesListBinding
 
 
-class NotesListFragment: Fragment() {
+class NotesListFragment: BaseFragment() {
 
     private lateinit var binding: FragmentNotesListBinding
 
