@@ -30,6 +30,8 @@ class CreateNoteFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textWatcher()
+
         binding.buttonSaveNote.setOnClickListener {
             saveNoteInDatabase()
         }
@@ -37,9 +39,9 @@ class CreateNoteFragment: BaseFragment() {
         binding.buttonDeleteAllNotes.setOnClickListener {
             sharedViewModel.deleteAllNotes()
         }
+        
 
     }
-
 
     private fun saveNoteInDatabase() {
         if (inputCheck()) {
@@ -70,6 +72,33 @@ class CreateNoteFragment: BaseFragment() {
             }
         }
     }
+
+    private fun textWatcher() {
+        binding.inputTitle.doOnTextChanged { text, _, _, _ ->
+            when {
+                text!!.isEmpty() -> {
+                    binding.titleInputLayout.error = "Required"
+                }
+
+                text.isNotEmpty() -> {
+                    binding.titleInputLayout.error = null
+                }
+            }
+        }
+
+        binding.inputDescription.doOnTextChanged { text, _, _, _ ->
+            when {
+                text!!.isEmpty() -> {
+                    binding.descriptionInputLayout.error = "Required"
+                }
+
+                text.isNotEmpty() -> {
+                    binding.descriptionInputLayout.error = null
+                }
+            }
+        }
+    }
+
 
     private fun getDataFromUI(): Note {
         return Note(
