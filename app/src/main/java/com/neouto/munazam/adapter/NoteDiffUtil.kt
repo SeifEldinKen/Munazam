@@ -23,17 +23,19 @@ class NoteDiffUtil(
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return when {
-            oldList[oldItemPosition].id != newList[newItemPosition].id -> {
-                false
-            }
+            oldList[oldItemPosition].id != newList[newItemPosition].id -> false
 
-            oldList[oldItemPosition].title != newList[newItemPosition].title -> {
-                false
-            }
+            oldList[oldItemPosition].title != newList[newItemPosition].title -> false
 
-            oldList[oldItemPosition].description != newList[newItemPosition].description -> {
-                false
-            }
+            oldList[oldItemPosition].description != newList[newItemPosition].description -> false
+
+            oldList[oldItemPosition].category != newList[newItemPosition].category -> false
+
+            oldList[oldItemPosition].creationDateAndTime != newList[newItemPosition].creationDateAndTime -> false
+
+            oldList[oldItemPosition].imagePath != newList[newItemPosition].imagePath -> false
+
+            oldList[oldItemPosition].priority != newList[newItemPosition].priority -> false
 
             else -> true
         }
