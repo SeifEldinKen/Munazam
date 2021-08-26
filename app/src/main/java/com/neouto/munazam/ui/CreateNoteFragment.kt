@@ -39,7 +39,7 @@ class CreateNoteFragment: BaseFragment() {
         binding.buttonDeleteAllNotes.setOnClickListener {
             sharedViewModel.deleteAllNotes()
         }
-        
+
 
     }
 
