@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neouto.munazam.R
 import com.neouto.munazam.data.model.Note
+import com.neouto.munazam.ui.NoteOnClickListener
 
-class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+class NoteAdapter(private val listener: NoteOnClickListener): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     private var oldNotesList: List<Note> = emptyList()
 
@@ -30,6 +31,10 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         holder.apply {
             textViewTitle.text = currentNote.title
             textDescription.text = currentNote.description
+        }
+
+        holder.itemView.setOnClickListener {
+            listener.onClickItem(currentNote)
         }
 
     }

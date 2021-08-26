@@ -12,11 +12,11 @@ import com.neouto.munazam.data.model.Note
 import com.neouto.munazam.databinding.FragmentNotesListBinding
 
 
-class NotesListFragment: BaseFragment() {
+class NotesListFragment: BaseFragment(), NoteOnClickListener {
 
     private lateinit var binding: FragmentNotesListBinding
 
-    private val noteAdapter: NoteAdapter by lazy { NoteAdapter() }
+    private val noteAdapter: NoteAdapter by lazy { NoteAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +48,10 @@ class NotesListFragment: BaseFragment() {
     private fun setupRecyclerView(newNotesList: List<Note>) {
         noteAdapter.setData(newNotesList)
         binding.recyclerViewNotes.adapter = noteAdapter
+    }
+
+    override fun onClickItem(note: Note) {
+
     }
 
 }
