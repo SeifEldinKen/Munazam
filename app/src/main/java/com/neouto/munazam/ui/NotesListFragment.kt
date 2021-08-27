@@ -51,7 +51,8 @@ class NotesListFragment: BaseFragment(), NoteOnClickListener {
     }
 
     override fun onClickItem(note: Note) {
-
+        val action = NotesListFragmentDirections.actionNotesListFragmentToNoteUpdateFragment(note)
+        findNavController().navigate(action)
     }
 
 }

@@ -14,7 +14,7 @@ interface NoteDao {
     fun fetchAllNotes(): LiveData<List<Note>>
 
     @Update
-    fun update(note: Note)
+    suspend fun update(note: Note)
 
     @Delete
     fun delete(note: Note)

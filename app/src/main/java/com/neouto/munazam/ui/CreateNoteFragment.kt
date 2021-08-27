@@ -9,6 +9,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.neouto.munazam.R
 import com.neouto.munazam.data.model.Note
 import com.neouto.munazam.databinding.FragmentCreateNoteBinding
@@ -98,7 +99,6 @@ class CreateNoteFragment: BaseFragment() {
             }
         }
     }
-
 
     private fun getDataFromUI(): Note {
         return Note(
