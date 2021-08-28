@@ -1,5 +1,6 @@
 package com.neouto.munazam.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -76,10 +77,26 @@ class NoteUpdateFragment : BaseFragment() {
 
     // --> this method delete current note form database
     private fun deleteCurrentNote() {
-        sharedViewModel.deleteNote(args.customObject)
 
-        // --> Navigate back
-        findNavController().navigate(R.id.action_noteUpdateFragment_to_notesListFragment)
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Delete ${args.customObject.title}")
+        builder.setMessage("Are you sure you want to remove ${args.customObject.title}")
+
+        builder.setPositiveButton("Yes") { _, _ ->
+            sharedViewModel.deleteNote(args.customObject)
+            Toast.makeText(
+                requireContext(),
+                "Successfully Removed: ${args.customObject.title}",
+                Toast.LENGTH_SHORT
+            ).show()
+            // --> Navigate back
+            findNavController().navigate(R.id.action_noteUpdateFragment_to_notesListFragment)
+        }
+
+        builder.setNegativeButton("No") { _, _ -> }
+
+        builder.create().show()
     }
 
     private fun inputCheck(title: String, description: String): Boolean {
