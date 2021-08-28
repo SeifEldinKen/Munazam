@@ -36,6 +36,9 @@ class NoteUpdateFragment : BaseFragment() {
             updateNote()
         }
 
+        binding.buttonDeleteNote.setOnClickListener {
+            deleteCurrentNote()
+        }
 
     }
 
@@ -69,6 +72,14 @@ class NoteUpdateFragment : BaseFragment() {
             findNavController().navigate(R.id.action_noteUpdateFragment_to_notesListFragment)
         }
 
+    }
+
+    // --> this method delete current note form database
+    private fun deleteCurrentNote() {
+        sharedViewModel.deleteNote(args.customObject)
+
+        // --> Navigate back
+        findNavController().navigate(R.id.action_noteUpdateFragment_to_notesListFragment)
     }
 
     private fun inputCheck(title: String, description: String): Boolean {

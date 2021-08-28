@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.neouto.munazam.R
 import com.neouto.munazam.data.model.Note
 import com.neouto.munazam.databinding.FragmentCreateNoteBinding
-import kotlinx.android.synthetic.main.fragment_create_note.*
 
 
 class CreateNoteFragment: BaseFragment() {

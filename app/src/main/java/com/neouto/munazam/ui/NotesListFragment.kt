@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.neouto.munazam.R
 import com.neouto.munazam.adapter.NoteAdapter
+import com.neouto.munazam.adapter.SwipeToDelete
 import com.neouto.munazam.data.model.Note
 import com.neouto.munazam.databinding.FragmentNotesListBinding
 

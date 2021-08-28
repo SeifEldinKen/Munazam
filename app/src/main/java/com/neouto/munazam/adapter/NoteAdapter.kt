@@ -17,7 +17,7 @@ import com.neouto.munazam.ui.NoteOnClickListener
 
 class NoteAdapter(private val listener: NoteOnClickListener): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-    private var oldNotesList: List<Note> = emptyList()
+    var oldNotesList: List<Note> = emptyList()
 
 
     class NoteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
