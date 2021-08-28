@@ -13,11 +13,14 @@ import androidx.navigation.fragment.navArgs
 import com.neouto.munazam.R
 import com.neouto.munazam.data.model.Note
 import com.neouto.munazam.databinding.FragmentCreateNoteBinding
+import kotlinx.android.synthetic.main.fragment_create_note.*
 
 
 class CreateNoteFragment: BaseFragment() {
 
     private lateinit var binding: FragmentCreateNoteBinding
+
+    private var priority = 3
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,17 +44,52 @@ class CreateNoteFragment: BaseFragment() {
             sharedViewModel.deleteAllNotes()
         }
 
+        binding.radioGroupPriority.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId) {
+                binding.radioButtonHigh.id -> {
+                    priority = 1
+                }
+
+                binding.radioButtonMedium.id -> {
+                    priority = 2
+                }
+
+                binding.radioButtonLow.id -> {
+                    priority = 3
+                }
+            }
+        }
 
     }
 
+    // --> this method insert note to database
     private fun saveNoteInDatabase() {
-        if (inputCheck()) {
-            sharedViewModel.insertNote(getDataFromUI())
 
-            // --> Back
+        val title = binding.inputTitle.text.toString().trim()
+        val description = binding.inputDescription.text.toString().trim()
+        val category = ""
+        val creationDateAndTime = ""
+        val imagePath = ""
+
+
+        if (inputCheck()) {
+            // insert note to database in IO thread
+            sharedViewModel.insertNote(Note(
+                0, title, description, category, creationDateAndTime, imagePath, priority
+            ))
+
+            Toast.makeText(
+                requireContext(),
+                "Successfully added",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            // --> Navigate back
             findNavController().navigate(R.id.action_createNoteFragment_to_notesListFragment)
         }
     }
+
+
 
     private fun inputCheck(): Boolean {
         return when {
@@ -100,16 +138,16 @@ class CreateNoteFragment: BaseFragment() {
         }
     }
 
-    private fun getDataFromUI(): Note {
-        return Note(
-            0,
-            binding.inputTitle.text.toString().trim(),
-            binding.inputDescription.text.toString().trim(),
-            "",
-            "",
-            "",
-            3
-        )
-    }
+//    private fun getDataFromUI(): Note {
+//        return Note(
+//            0,
+//            binding.inputTitle.text.toString().trim(),
+//            binding.inputDescription.text.toString().trim(),
+//            "",
+//            "",
+//            "",
+//            3
+//        )
+//    }
 
 }

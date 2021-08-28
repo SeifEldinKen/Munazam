@@ -48,7 +48,41 @@
                 android:minHeight="@dimen/_100sdp"
                 android:gravity="start"/>
         </com.google.android.material.textfield.TextInputLayout>
-        
+
+
+        <RadioGroup
+            android:id="@+id/radioGroupPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/descriptionInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/descriptionInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/descriptionInputLayout">
+
+            <RadioButton
+                android:id="@+id/radioButtonHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="High"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="Medium"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonLow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="Low"/>
+
+        </RadioGroup>
+
         <Button
             android:id="@+id/buttonSaveNote"
             android:layout_width="wrap_content"
@@ -56,7 +90,7 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             android:text="Save"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupPriority"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <Button
@@ -66,7 +100,7 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_16sdp"
             android:text="Delete all notes"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupPriority"
             app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

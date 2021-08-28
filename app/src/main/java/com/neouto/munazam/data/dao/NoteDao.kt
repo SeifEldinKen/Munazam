@@ -10,7 +10,8 @@ interface NoteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(note: Note)
 
-    @Query("SELECT * FROM notes_table ORDER BY id ASC")
+    // --> ASC (Progressive) - DESC = (Descending)
+    @Query("SELECT * FROM notes_table ORDER BY id DESC")
     fun fetchAllNotes(): LiveData<List<Note>>
 
     @Update
