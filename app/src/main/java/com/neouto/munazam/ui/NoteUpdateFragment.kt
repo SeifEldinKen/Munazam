@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.neouto.munazam.R
@@ -63,11 +62,10 @@ class NoteUpdateFragment : BaseFragment() {
             )
             sharedViewModel.updateNote(updateNote)
 
-            Toast.makeText(
+            showToast(
                 requireContext(),
-                "Successfully updated",
-                Toast.LENGTH_SHORT
-            ).show()
+                "Successfully updated"
+            )
 
             // --> Navigate back
             findNavController().navigate(R.id.action_noteUpdateFragment_to_notesListFragment)
@@ -78,26 +76,24 @@ class NoteUpdateFragment : BaseFragment() {
     // --> this method delete current note form database
     private fun deleteCurrentNote() {
 
-        val builder = AlertDialog.Builder(requireContext())
-
-        builder.setTitle("Delete ${args.customObject.title}")
-        builder.setMessage("Are you sure you want to remove ${args.customObject.title}")
-
-        builder.setPositiveButton("Yes") { _, _ ->
+        showDialog(
+            requireContext(),
+            "Delete ${args.customObject.title}?",
+            "Are you sure you want to remove ${args.customObject.title}"
+        ) {
             sharedViewModel.deleteNote(args.customObject)
-            Toast.makeText(
+
+            showToast(
                 requireContext(),
-                "Successfully Removed: ${args.customObject.title}",
-                Toast.LENGTH_SHORT
-            ).show()
+                "Successfully Removed: ${args.customObject.title}"
+            )
+
             // --> Navigate back
             findNavController().navigate(R.id.action_noteUpdateFragment_to_notesListFragment)
         }
 
-        builder.setNegativeButton("No") { _, _ -> }
-
-        builder.create().show()
     }
+
 
     private fun inputCheck(title: String, description: String): Boolean {
         return when {

@@ -93,16 +93,6 @@
             app:layout_constraintTop_toBottomOf="@+id/radioGroupPriority"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <Button
-            android:id="@+id/buttonDeleteAllNotes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:text="Delete all notes"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroupPriority"
-            app:layout_constraintStart_toStartOf="parent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
     
 </ScrollView>

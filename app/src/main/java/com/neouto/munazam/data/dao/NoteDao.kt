@@ -23,4 +23,7 @@ interface NoteDao {
     @Query("DELETE FROM notes_table")
     suspend fun deleteAllNotes()
 
+    @Query("SELECT * FROM notes_table WHERE title LIKE :searchQuery")
+    fun searchInDatabase(searchQuery: String): LiveData<List<Note>>
+
 }

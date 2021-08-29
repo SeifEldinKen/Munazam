@@ -43,6 +43,10 @@ class NoteViewModel(private val repository: NoteRepository): ViewModel() {
         }
     }
 
+    fun searchInDatabase(searchQuery: String): LiveData<List<Note>> {
+        return repository.searchInDatabase(searchQuery)
+    }
+
 }
 
 class NoteViewModelFactory(private val repository: NoteRepository): ViewModelProvider.Factory {

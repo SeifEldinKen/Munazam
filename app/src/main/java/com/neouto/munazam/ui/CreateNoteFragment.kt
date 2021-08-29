@@ -36,9 +36,6 @@ class CreateNoteFragment: BaseFragment() {
             saveNoteInDatabase()
         }
 
-        binding.buttonDeleteAllNotes.setOnClickListener {
-            sharedViewModel.deleteAllNotes()
-        }
 
         binding.radioGroupPriority.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId) {
@@ -133,17 +130,5 @@ class CreateNoteFragment: BaseFragment() {
             }
         }
     }
-
-//    private fun getDataFromUI(): Note {
-//        return Note(
-//            0,
-//            binding.inputTitle.text.toString().trim(),
-//            binding.inputDescription.text.toString().trim(),
-//            "",
-//            "",
-//            "",
-//            3
-//        )
-//    }
 
 }
