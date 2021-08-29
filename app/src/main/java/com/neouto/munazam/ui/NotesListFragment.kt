@@ -29,8 +29,7 @@ class NotesListFragment: BaseFragment(), NoteOnClickListener, SearchView.OnQuery
 
         setHasOptionsMenu(true)
 
-        // --> Observe the live data in database
-        observeNoteInDatabase()
+        setupRecyclerView()
 
         binding.fabCreateNote.setOnClickListener {
             findNavController().navigate(R.id.action_notesListFragment_to_createNoteFragment)
@@ -38,18 +37,33 @@ class NotesListFragment: BaseFragment(), NoteOnClickListener, SearchView.OnQuery
 
     }
 
-    private fun observeNoteInDatabase() {
-        sharedViewModel.fetchAllNoteLiveData.observe(viewLifecycleOwner, { notesList ->
-            setupRecyclerView(notesList)
-        })
-    }
 
     // --> setup recyclerView and adapter
-    private fun setupRecyclerView(newNotesList: List<Note>) {
-        noteAdapter.setData(newNotesList)
+    private fun setupRecyclerView() {
+
+        // --> observe the live data in database
+        sharedViewModel.fetchAllNoteLiveData.observe(viewLifecycleOwner, { notesList ->
+            noteAdapter.setData(notesList)
+        })
+
         binding.recyclerViewNotes.adapter = noteAdapter
     }
 
+    // --> this method delete all note form database
+    private fun deleteAllNotes() {
+        showDialog(
+            requireContext(),
+            "Delete all notes",
+            "Are you sure you want to remove all notes"
+        ) {
+            sharedViewModel.deleteAllNotes()
+
+            showToast(
+                requireContext(),
+                "Successfully Deleted All Notes"
+            )
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
@@ -62,11 +76,10 @@ class NotesListFragment: BaseFragment(), NoteOnClickListener, SearchView.OnQuery
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when(item.itemId) {
 
             R.id.menuDeleteAllNotes -> {
-                sharedViewModel.deleteAllNotes()
+                deleteAllNotes()
             }
 
         }
