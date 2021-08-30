@@ -1,15 +1,18 @@
 package com.neouto.munazam.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.neouto.munazam.R
 import com.neouto.munazam.adapter.NoteAdapter
 import com.neouto.munazam.data.model.Note
 import com.neouto.munazam.databinding.FragmentNotesListBinding
+import java.text.FieldPosition
 
 
 class NotesListFragment: BaseFragment(), NoteOnClickListener, SearchView.OnQueryTextListener {
@@ -78,15 +81,13 @@ class NotesListFragment: BaseFragment(), NoteOnClickListener, SearchView.OnQuery
         val swipeToDeleteCallback = object: SwipeToDelete() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val itemToDelete = noteAdapter.oldNotesList[viewHolder.adapterPosition]
+                val deleteItem: Note = noteAdapter.oldNotesList[viewHolder.adapterPosition]
 
-                sharedViewModel.deleteNote(itemToDelete)
+                // --> Delete Item
+                sharedViewModel.deleteNote(deleteItem)
 
-                showToast(
-                    requireContext(),
-                    "Successfully removed: '${itemToDelete.title}'"
-                )
-
+                // --> Restore Delete Item
+                restoreDeleteNote(viewHolder.itemView, deleteItem)
             }
 
         }
@@ -94,6 +95,21 @@ class NotesListFragment: BaseFragment(), NoteOnClickListener, SearchView.OnQuery
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
+    }
+
+    // --> This Method Restore Delete Note
+    private fun restoreDeleteNote(view: View, itemDelete: Note) {
+        val snackBar: Snackbar = Snackbar.make(
+            view,
+            "Deleted '${itemDelete.title}'",
+            Snackbar.LENGTH_LONG
+        )
+
+        snackBar.setAction("Undo") {
+            sharedViewModel.insertNote(itemDelete)
+        }
+
+        snackBar.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
